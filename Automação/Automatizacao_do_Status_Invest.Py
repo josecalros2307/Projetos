@@ -4,8 +4,8 @@ import os
 import subprocess
 
 # Definir a URL da página e o caminho do Chrome
-url = "https://statusinvest.com.br/acoes/busca-avancada"
-chrome_path = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+url = "colocar o local do site que deseja acessar"
+chrome_path = "colocar o local de onde se encontra o endereço do google chrome"
 
 # Abrir a página no Chrome usando webbrowser
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
