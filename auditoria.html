@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoria de Lojas</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Adicionando FontAwesome para ícones -->
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Cor de fundo mais suave */
+    color: #444; /* Cor do texto mais escura */
+    transition: background-color 0.3s ease;
+  }
+  header {
+    background-color: #2c3e50; /* Cor de fundo do cabeçalho */
+    color: #fff; /* Cor do texto do cabeçalho */
+    padding: 20px;
+    text-align: center;
+  }
+  .user-icon {
+    font-size: 24px;
+  }
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  .subinfo {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .field {
+    margin-bottom: 20px;
+  }
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  input[type="text"], input[type="number"], select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+  }
+  input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: #3498db; /* Cor do campo em foco */
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #3498db; /* Cor do botão */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    display: block;
+  }
+  button:hover {
+    background-color: #2980b9; /* Cor do botão ao passar o mouse */
+  }
+  .pdf-button {
+    padding: 10px 20px;
+    background-color: #2ecc71; /* Cor do botão de PDF */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto;
+    width: 200px;
+    text-align: center;
+  }
+  .pdf-button:hover {
+    background-color: #27ae60; /* Cor do botão de PDF ao passar o mouse */
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <i class="fas fa-user user-icon"></i>
+      <h1>Seja bem-vindo à Auditoria de Lojas</h1>
+      <p class="subinfo">CNPJ: 00.000.000/0000-00 | Rua: Exemplo, 123 | Cidade: Exemplo | Telefone: (00) 1234-5678 | Número da Filial: 001</p>
+      <p class="subinfo">Filial de Recolhimento: Sim | Gerente: Fulano de Tal</p>
+    </div>
+  </header>
+
+  <form id="auditoriaForm">
+    <h2>Auditoria de Lojas - Preenchimento Diário</h2>
+    <div class="field">
+      <label for="troco">Valor de Troco:</label>
+      <input type="number" id="troco" name="troco" placeholder="Informe o valor de troco" step="0.01" required>
+    </div>
+    <div class="field">
+      <label for="data">Data:</label>
+      <input type="date" id="data" name="data" required>
+    </div>
+    <div class="field">
+      <label for="saldo">Saldo Pendente a Depositar:</label>
+      <input type="number" id="saldo" name="saldo" placeholder="Informe o saldo pendente a depositar" step="0.01" required>
+    </div>
+    <div class="field">
+      <label for="valor_loja">Valor em Loja:</label>
+      <input type="number" id="valor_loja" name="valor_loja" placeholder="Informe o valor em loja" step="0.01" required oninput="calcularDiferenca()">
+    </div>
+    <div class="field">
+      <label for="diferenca">Diferença:</label>
+      <input type="number" id="diferenca" name="diferenca" readonly>
+    </div>
+    <div class="field">
+      <label for="ajuste">Como será ajustada a diferença:</label>
+      <input type="text" id="ajuste" name="ajuste" placeholder="Informe como será ajustada a diferença" required>
+    </div>
+    <div class="field">
+      <label for="realizacao">A filial está realizando os processos diariamente?</label>
+      <select id="realizacao" name="realizacao" required>
+        <option value="">Selecione uma opção</option>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+      </select>
+    </div>
+    <button type="submit">Enviar Auditoria</button>
+  </form>
+
+  <button class="pdf-button" onclick="gerarPDF()">Baixar PDF</button>
+
+  <script>
+    function calcularDiferenca() {
+      var saldoPendente = parseFloat(document.getElementById("saldo").value);
+      var valorLoja = parseFloat(document.getElementById("valor_loja").value);
+      var diferenca = valorLoja - saldoPendente;
+      document.getElementById("diferenca").value = diferenca.toFixed(2);
+    }
+
+    function gerarPDF() {
+      // Lógica para gerar o PDF
+      alert("PDF gerado com sucesso!");
+    }
+  </script>
+</body>
+</html>
